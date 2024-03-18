@@ -30,20 +30,16 @@ namespace Core.EntityView
                 ViewConfig viewConfig = entity.GetComponent<ViewConfig>();
                 SpriteRendererView spriteRendererView = _poolableObjectProvider.GetFromPool(viewConfig.viewPrefab);
                 spriteRendererView.SpriteRenderer.color = viewConfig.color;
-                entity.SetComponent(new EntityView
-                        {
-                                view = spriteRendererView,
-                                ReturnToPoolAction = _poolableObjectProvider.ReturnToPool
-                        });
+                entity.SetComponent(new EntityView {view = spriteRendererView});
             }
         }
 
         public void Dispose() { }
-        
+
         public class Factory : IFactory<CreateViewSystem>
         {
             private readonly IPoolableObjectProvider _poolableObjectProvider;
-        
+
             public Factory(IPoolableObjectProvider poolableObjectProvider)
             {
                 _poolableObjectProvider = poolableObjectProvider;

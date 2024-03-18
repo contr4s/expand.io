@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Scellecs.Morpeh;
+using Scellecs.Morpeh.Providers;
 using Zenject;
-using Installer = Scellecs.Morpeh.Installer;
 using IFactory = Util.Factory.IFactory<Scellecs.Morpeh.IInitializer>;
 
 
@@ -11,13 +11,13 @@ namespace Core.Startup
     public class GameStartup : IInitializable, IDisposable
     {
         private readonly List<IFactory> _factories;
-        private readonly Installer _installer;
+        private readonly WorldViewer _worldViewer;
         
         private World _world = World.Default;
 
-        public GameStartup(IEnumerable<IFactory> factories, Installer installer)
+        public GameStartup(IEnumerable<IFactory> factories, WorldViewer worldViewer)
         {
-            _installer = installer;
+            _worldViewer = worldViewer;
             _factories = new List<IFactory>(factories);
         }
 
@@ -25,7 +25,7 @@ namespace Core.Startup
         {
             _world = World.Create();
             SystemsGroup systemsGroup = _world.CreateSystemsGroup();
-            _installer.World = _world;
+            _worldViewer.World = _world;
             
             foreach (var factory in _factories)
             {

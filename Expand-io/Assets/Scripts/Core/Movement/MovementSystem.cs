@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Core.Common;
+using UnityEngine;
 using Util.Factory;
 
 namespace Core.Movement
@@ -7,11 +8,17 @@ namespace Core.Movement
 
     public sealed class MovementSystem : ISystem
     {
-        public class Factory : TemplateFactory<MovementSystem> { }
-        
         public World World { get; set; }
         
         private Filter _filter;
+
+        private readonly Map _map;
+        
+        public MovementSystem(Map map)
+        
+        {
+            _map = map;
+        }
 
         public void OnAwake()
         {
@@ -26,9 +33,19 @@ namespace Core.Movement
                 float speed = entity.GetComponent<MoveSpeed>().speed;
                 Vector2 direction = entity.GetComponent<MoveDirection>().direction;
                 position.position += direction * speed * deltaTime;
+                position.position = _map.ClampPosition(position.position);
             }
         }
         
         public void Dispose() { }
+
+        public class Factory : IFactory<MovementSystem>
+        {
+            private readonly Map _map;
+            public Factory(Map map) => _map = map;
+
+            public MovementSystem Create() => new(_map);
+        }
+        
     }
 }

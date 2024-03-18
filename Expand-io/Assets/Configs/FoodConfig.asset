@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ab55a09622e42089b2d704444801155, type: 3}
+  m_Name: FoodConfig
+  m_EditorClassIdentifier: 
+  <ViewPrefab>k__BackingField: {fileID: -6109729066345674205, guid: fc29f8828de2f32488588d9a92f9af13, type: 3}
+  <Size>k__BackingField: 0.2
+  <StartCount>k__BackingField: 50
+  <SpawnInterval>k__BackingField: 0.4

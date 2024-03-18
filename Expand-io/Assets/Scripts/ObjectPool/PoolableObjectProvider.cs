@@ -42,7 +42,9 @@ namespace ObjectPool
                 {
                     if (container is IPoolContainer<T> genericContainer)
                     {
-                        return genericContainer.GetObject();
+                        T result = genericContainer.GetObject();
+                        _prototypes.TryAdd(result, prefab);
+                        return result;
                     }
 
                     Debug.LogError($"Pool container for {typeof(T)} is not a generic pool container");
@@ -59,7 +61,7 @@ namespace ObjectPool
             containers.Add(prefab, poolContainer);
 
             T res = poolContainer.GetObject();
-            _prototypes.Add(res, prefab);
+            _prototypes.TryAdd(res, prefab);
             return res;
         }
         

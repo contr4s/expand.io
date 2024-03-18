@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <PlayerPrefab>k__BackingField: {fileID: -6109729066345674205, guid: 7dfbd3128eca4d14384f97d5bf224cae, type: 3}
   <Color>k__BackingField: {r: 0.13150918, g: 1, b: 0, a: 1}
-  <Speed>k__BackingField: 4
+  <StartSize>k__BackingField: 1

@@ -8,6 +8,6 @@ namespace Configs
     {
         [field: SerializeField] public SpriteRendererView PlayerPrefab { get; private set; }
         [field: SerializeField] public Color Color { get; private set; }
-        [field: SerializeField] public float Speed { get; private set; }
+        [field: SerializeField] public float StartSize { get; private set; }
     }
 }

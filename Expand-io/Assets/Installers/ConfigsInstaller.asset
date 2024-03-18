@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: ConfigsInstaller
   m_EditorClassIdentifier: 
   playerConfig: {fileID: 11400000, guid: d1efca42472510341a28a175c77c4763, type: 2}
+  constantsConfig: {fileID: 11400000, guid: db0791ec7ba5ecb4692479a65b79e9fc, type: 2}
+  foodConfig: {fileID: 11400000, guid: 739ba5e3056273e4ea98aff637e803f6, type: 2}
