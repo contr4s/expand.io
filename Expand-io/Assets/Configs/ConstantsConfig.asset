@@ -12,4 +12,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd0dd14ac6654783aa632269cafa1008, type: 3}
   m_Name: ConstantsConfig
   m_EditorClassIdentifier: 
-  <SpeedSizeConversion>k__BackingField: 20

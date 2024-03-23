@@ -32,6 +32,11 @@ namespace Core.Movement
                 ref Place position = ref entity.GetComponent<Place>();
                 float speed = entity.GetComponent<MoveSpeed>().speed;
                 Vector2 direction = entity.GetComponent<MoveDirection>().direction;
+                if (direction.sqrMagnitude > 1)
+                {
+                    direction = direction.normalized;
+                }
+                
                 position.position += direction * speed * deltaTime;
                 position.position = _map.ClampPosition(position.position);
             }

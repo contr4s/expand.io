@@ -1,5 +1,5 @@
-﻿using ObjectPool;
-using UnityEngine;
+﻿using UnityEngine;
+using Util.ObjectPool;
 
 namespace Core.EntityView
 {

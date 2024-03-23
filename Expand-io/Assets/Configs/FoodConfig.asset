@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: FoodConfig
   m_EditorClassIdentifier: 
   <ViewPrefab>k__BackingField: {fileID: -6109729066345674205, guid: fc29f8828de2f32488588d9a92f9af13, type: 3}
-  <Size>k__BackingField: 0.2
-  <StartCount>k__BackingField: 50
-  <SpawnInterval>k__BackingField: 0.4
+  <Size>k__BackingField: 0.5
+  <NutritionCoef>k__BackingField: 0.1
+  <StartCount>k__BackingField: 400
+  <SpawnInterval>k__BackingField: 0.1

@@ -1,5 +1,4 @@
-﻿using Configs;
-using Core.Movement;
+﻿using Core.Movement;
 using Scellecs.Morpeh;
 using Util.Factory;
 
@@ -10,12 +9,12 @@ namespace Core.Expansion
         public World World { get; set; }
 
         private Filter _filter;
-        
-        private readonly ConstantsConfig _constantsConfig;
-        
-        public AlignSpeedWithSizeSystem(ConstantsConfig constantsConfig)
+
+        private readonly SpeedSizeConversionConfig _speedSizeConversionConfig;
+
+        public AlignSpeedWithSizeSystem(SpeedSizeConversionConfig speedSizeConversionConfig)
         {
-            _constantsConfig = constantsConfig;
+            _speedSizeConversionConfig = speedSizeConversionConfig;
         }
 
         public void OnAwake()
@@ -29,22 +28,20 @@ namespace Core.Expansion
             {
                 float size = entity.GetComponent<Size>().size;
                 ref MoveSpeed speed = ref entity.GetComponent<MoveSpeed>();
-                speed.speed = _constantsConfig.SpeedSizeConversion / size;
+                speed.speed = _speedSizeConversionConfig.GetSpeed(size);
             }
         }
-        
+
         public void Dispose() { }
-        
+
         public class Factory : IFactory<AlignSpeedWithSizeSystem>
         {
-            private readonly ConstantsConfig _constantsConfig;
-            
-            public Factory(ConstantsConfig constantsConfig)
-            {
-                _constantsConfig = constantsConfig;
-            }
+            private readonly SpeedSizeConversionConfig _speedSizeConversionConfig;
 
-            public AlignSpeedWithSizeSystem Create() => new AlignSpeedWithSizeSystem(_constantsConfig);
+            public Factory(SpeedSizeConversionConfig speedSizeConversionConfig) =>
+                    _speedSizeConversionConfig = speedSizeConversionConfig;
+
+            public AlignSpeedWithSizeSystem Create() => new AlignSpeedWithSizeSystem(_speedSizeConversionConfig);
         }
     }
 }

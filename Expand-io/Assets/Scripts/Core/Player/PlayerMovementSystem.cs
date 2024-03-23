@@ -27,7 +27,7 @@ namespace Core.Player
                 Vector2 screenCenter = new Vector2(Screen.width / 2f, Screen.height / 2f);
                 Vector2 dir = (Vector2)input - screenCenter;
                 ref MoveDirection moveDirection = ref entity.GetComponent<MoveDirection>();
-                moveDirection.direction = new Vector2(dir.x / Screen.width, dir.y / Screen.height);
+                moveDirection.direction = new Vector2(dir.x / Screen.width * 2, dir.y / Screen.height * 2);
             }
         }
         

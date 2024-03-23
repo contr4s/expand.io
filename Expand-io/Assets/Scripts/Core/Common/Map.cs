@@ -12,16 +12,22 @@ namespace Core.Common
         public Map(float xMax,
                    float yMax,
                    float xMin,
-                   float yMin)
+                   float yMin,
+                   SpriteRenderer mapBackground,
+                   float cellSize)
         {
             _xMax = xMax;
             _yMax = yMax;
             _xMin = xMin;
             _yMin = yMin;
+            mapBackground.size = new Vector2((_xMax - _xMin) / cellSize, (_yMax - _yMin) / cellSize);
+            mapBackground.transform.localScale = new Vector3(cellSize, cellSize, 1);
         }
 
-        public Map(float width, float height) : this(width / 2, height / 2, -width / 2, -height / 2) { }
-        
+        public Map(float width, float height, SpriteRenderer mapBackground,
+                   float cellSize) : this(
+                width / 2, height / 2, -width / 2, -height / 2, mapBackground, cellSize) { }
+
         public Vector2 RandomPointInside => new Vector2(Random.Range(_xMin, _xMax), Random.Range(_yMin, _yMax));
 
         public bool IsInside(Vector2 position) =>

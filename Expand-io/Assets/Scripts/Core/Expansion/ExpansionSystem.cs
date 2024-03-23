@@ -2,9 +2,9 @@
 using Core.EntityView;
 using Core.Movement;
 using Extensions;
-using ObjectPool;
 using UnityEngine;
 using Util.Factory;
+using Util.ObjectPool;
 
 namespace Core.Expansion
 {
@@ -14,7 +14,8 @@ namespace Core.Expansion
     {
         public World World { get; set; }
 
-        private Filter _filter;
+        private Filter _foodFilter;
+        private Filter _consumerFilter;
 
         private readonly IPoolableObjectProvider _poolableObjectProvider;
 
@@ -25,57 +26,44 @@ namespace Core.Expansion
 
         public void OnAwake()
         {
-            _filter = World.Filter.With<Size>().With<Place>().Build();
+            _foodFilter = World.Filter.With<Food>().With<Size>().With<Place>().Build();
+            _consumerFilter = World.Filter.With<Consumer>().With<Size>().With<Place>().Build();
         }
 
         public void OnUpdate(float deltaTime)
         {
-            foreach (Entity first in _filter)
+            foreach (Entity consumer in _consumerFilter)
             {
-                foreach (Entity second in _filter)
+                foreach (Entity food in _foodFilter)
                 {
-                    if (first.IsNullOrDisposed() || second.IsNullOrDisposed() || first == second)
-                    {
-                        continue;
-                    }
-                    
-                    Vector2 position1 = first.GetComponent<Place>().position;
-                    Vector2 position2 = second.GetComponent<Place>().position;
-                    ref Size size1 = ref first.GetComponent<Size>();
-                    ref Size size2 = ref second.GetComponent<Size>();
-                    float maxSize = Math.Max(size1.size, size2.size);
-
-                    if (!position1.IsPointInsideCircle(position2, maxSize))
+                    if (consumer.IsNullOrDisposed() || food.IsNullOrDisposed() || consumer == food)
                     {
                         continue;
                     }
 
-                    if (size1.size > size2.size)
+                    Vector2 consumerPos = consumer.GetComponent<Place>().position;
+                    Vector2 foodPos = food.GetComponent<Place>().position;
+                    ref Size consumerSize = ref consumer.GetComponent<Size>();
+                    Size foodSize = food.GetComponent<Size>();
+
+                    if (consumerSize.size < foodSize.size ||
+                        !consumerPos.IsPointInsideCircle(foodPos, consumerSize.size))
                     {
-                        size1.size += size2.size;
-                        RemoveEntity(second);
+                        continue;
                     }
-                    else if (size2.size > size1.size)
+
+                    consumerSize.size += foodSize.size * food.GetComponent<Food>().nutritionCoef;
+                    if (food.Has<EntityView.EntityView>())
                     {
-                        size2.size += size1.size;
-                        RemoveEntity(first);
+                        SpriteRendererView spriteRendererView = food.GetComponent<EntityView.EntityView>().view;
+                        _poolableObjectProvider.ReturnToPool(spriteRendererView);
                     }
+                    World.RemoveEntity(food);
                 }
             }
         }
 
         public void Dispose() { }
-
-        private void RemoveEntity(Entity entity)
-        {
-            if (entity.Has<EntityView.EntityView>())
-            {
-                SpriteRendererView spriteRendererView = entity.GetComponent<EntityView.EntityView>().view;
-                _poolableObjectProvider.ReturnToPool(spriteRendererView);
-            }
-
-            World.RemoveEntity(entity);
-        }
 
         public class Factory : IFactory<ExpansionSystem>
         {

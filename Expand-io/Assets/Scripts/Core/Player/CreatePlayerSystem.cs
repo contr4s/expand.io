@@ -1,5 +1,4 @@
-﻿using Configs;
-using Core.EntityView;
+﻿using Core.EntityView;
 using Core.Expansion;
 using Core.Movement;
 using Scellecs.Morpeh;
@@ -25,6 +24,8 @@ namespace Core.Player
             entity.AddComponent<Place>();
             entity.AddComponent<MoveDirection>();
             entity.AddComponent<MoveSpeed>();
+            entity.AddComponent<Consumer>();
+            entity.SetComponent(new Food {nutritionCoef = _playerConfig.NutritionCoef});
             entity.SetComponent(new Size {size = _playerConfig.StartSize});
             entity.SetComponent(new ViewConfig {viewPrefab = _playerConfig.PlayerPrefab, color = _playerConfig.Color});
         }

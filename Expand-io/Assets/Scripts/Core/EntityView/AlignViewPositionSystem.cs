@@ -20,6 +20,11 @@ namespace Core.EntityView
         public void OnUpdate(float deltaTime)
         {
             foreach (Entity entity in _filter) {
+                if (entity.IsNullOrDisposed())
+                {
+                    continue;
+                }
+                
                 Place place = entity.GetComponent<Place>();
                 EntityView entityView = entity.GetComponent<EntityView>();
                 entityView.view.transform.position = place.position;

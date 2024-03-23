@@ -9,6 +9,13 @@
       },
       "hash": "57e726cc4f2c8d3488011f312d5b22dab2b19dc5"
     },
+    "com.cysharp.unitask": {
+      "version": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "809d23edae0df58fd0f61b4b6f67855c59d1b2fb"
+    },
     "com.scellecs.morpeh": {
       "version": "https://github.com/scellecs/morpeh.git",
       "depth": 0,

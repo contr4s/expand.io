@@ -1,5 +1,5 @@
-﻿using ObjectPool;
-using Util.Factory;
+﻿using Util.Factory;
+using Util.ObjectPool;
 
 namespace Core.EntityView
 {
