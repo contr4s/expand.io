@@ -35,7 +35,7 @@ namespace Core.Enemy.Retreat
                     continue;
                 }
 
-                float triggeringRadius = _behaviourInfo.DefaultRetreatDistance + otherSize;
+                float triggeringRadius = _behaviourInfo.GetRetreatDistance(otherSize, false);
                 Vector2 position = entity.GetComponent<Place>().position;
                 Vector2 otherPosition = other.GetComponent<Place>().position;
                 if ((position - otherPosition).sqrMagnitude < triggeringRadius * triggeringRadius)

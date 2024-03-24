@@ -6,5 +6,6 @@ namespace Core.Common
 
     public class ConstantsConfig : ScriptableObject
     {
+        [field: SerializeField] public int MaxSize { get; private set; }
     }
 }

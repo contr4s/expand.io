@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: RetreatBehaviourInfo
   m_EditorClassIdentifier: 
   <Aggressiveness>k__BackingField: 0
-  <FollowTime>k__BackingField: 3
-  <RetreatDistance>k__BackingField: 2
+  <FollowTime>k__BackingField: 4
+  <DefaultRetreatDistance>k__BackingField: 8
+  <ForceRetreatDistance>k__BackingField: 2

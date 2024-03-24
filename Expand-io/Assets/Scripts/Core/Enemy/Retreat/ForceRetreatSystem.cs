@@ -20,7 +20,7 @@ namespace Core.Enemy.Retreat
 
         public void OnAwake()
         {
-            _filter = World.Filter.With<CurrentBehaviourStrategy>().Build();
+            _filter = World.Filter.With<CurrentBehaviourStrategy>().Without<Retreat>().Build();
             _othersFilter = World.Filter.With<Consumer>().With<Size>().With<Place>().Build();
         }
 
@@ -37,7 +37,7 @@ namespace Core.Enemy.Retreat
                         continue;
                     }
 
-                    float triggeringRadius = _behaviourInfo.ForceRetreatDistance + otherSize;
+                    float triggeringRadius = _behaviourInfo.GetRetreatDistance(otherSize, true);
                     Vector2 position = entity.GetComponent<Place>().position;
                     Vector2 otherPosition = other.GetComponent<Place>().position;
                     if ((position - otherPosition).sqrMagnitude > triggeringRadius * triggeringRadius)
@@ -50,7 +50,6 @@ namespace Core.Enemy.Retreat
 
                     currentBehaviourStrategy.timeLeft = 0;
                     entity.SetComponent(new ChangeBehaviourRequest {NewBehaviourType = typeof(Retreat)});
-
                     return;
                 }
             }
